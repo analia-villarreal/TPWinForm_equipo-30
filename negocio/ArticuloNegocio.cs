@@ -12,6 +12,48 @@ namespace negocio
 {
     public class ArticuloNegocio
     {
+        public List<Articulo> ListaconSP()
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                //string consulta = "SELECT Nombre, Codigo,a.Descripcion,Precio,i.ImagenUrl,m.Descripcion AS Marca, a.IdCategoria,c.Descripcion AS Categoria,a.IdMarca,a.Id FROM ARTICULOS a INNER JOIN MARCAS m ON m.Id = a.IdMarca INNER JOIN CATEGORIAS c ON c.Id = a.IdCategoria INNER JOIN IMAGENES i ON i.IdArticulo = a.Id";
+                //datos.setearConsulta(consulta);
+                datos.setearProcedimiento("StoredListar");
+
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+
+                    Articulo aux = new Articulo();
+
+                    aux.ID = (int)datos.Lector["Id"];
+                    aux.NombreArticulo = (string)datos.Lector["Nombre"];
+                    aux.CodArticulo = (string)datos.Lector["Codigo"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    if (!(datos.Lector["ImagenUrl"] is DBNull))
+                        aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                    aux.Marca = new Marca();
+                    aux.Marca.IDMarca = (int)datos.Lector["IdMarca"];
+                    aux.Marca.NombreMarca = (string)datos.Lector["Marca"];
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.IDCategoria = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.NombreCategoria = (string)datos.Lector["Categoria"];
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
         public List<Articulo> Listar()
         {
             List<Articulo> lista = new List<Articulo>();
@@ -87,8 +129,6 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
-<<<<<<< HEAD
-=======
         }
         //public string RecuperarIDArt(string codigo)
         //{
@@ -113,11 +153,9 @@ namespace negocio
            
         //}
 
->>>>>>> 8521c56a0cff7cfab942d4d9c88690d8fc82112c
+       //     Int32 IDArticulo = (Int32)nuevo.ExecuteScalar();
 
-            Int32 IDArticulo = (Int32)nuevo.ExecuteScalar();
-
-        }
+       // }
         /*
         public void agregarImagen(Articulo art)
         {

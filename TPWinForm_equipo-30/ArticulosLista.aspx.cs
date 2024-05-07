@@ -1,24 +1,22 @@
-﻿using negocio;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using negocio;
 using dominio;
 
 namespace TPWinForm_equipo_30
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class ArticulosLista : System.Web.UI.Page
     {
-
-        public List<Articulo> ListaArticulos { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
 
             ArticuloNegocio negocio = new ArticuloNegocio();
-            ListaArticulos = negocio.ListaconSP();
-
+            dvgArticulos.DataSource = negocio.ListaconSP();
+            dvgArticulos.DataBind();
         }
     }
 }
