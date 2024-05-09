@@ -13,10 +13,22 @@ namespace TPWinForm_equipo_30
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             ArticuloNegocio negocio = new ArticuloNegocio();
             dvgArticulos.DataSource = negocio.ListaconSP();
             dvgArticulos.DataBind();
+        }
+
+        protected void dvgArticulos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dvgArticulos.PageIndex = e.NewPageIndex;
+            dvgArticulos.DataBind();
+        }
+
+        protected void dvgArticulos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var id = dvgArticulos.SelectedDataKey.Value.ToString();
+
+            Response.Redirect("ArticuloForm.aspx?ID=" + id);
         }
     }
 }
