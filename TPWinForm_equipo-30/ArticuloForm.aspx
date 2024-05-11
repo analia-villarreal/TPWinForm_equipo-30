@@ -78,7 +78,6 @@
             <div class="mb-3 row">
 
                 <div class="col-sm-10">
-                    <asp:Button ID="Button1" runat="server" Text="Button" OnClick="btnAceptar_Click" />
                     <asp:Button CssClass="btn btn-primary" ID="btnAceptar" OnClick="btnAceptar_Click" runat="server" Text="Aceptar" />
                 </div>
             </div>

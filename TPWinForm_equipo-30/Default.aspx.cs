@@ -20,5 +20,10 @@ namespace TPWinForm_equipo_30
             ListaArticulos = negocio.ListaconSP();
 
         }
+
+        protected void btnCarrito_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("Carrito.aspx");
+        }
     }
 }

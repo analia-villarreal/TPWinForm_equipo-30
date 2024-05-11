@@ -42,7 +42,8 @@
 
             <div class="mb-3">
                 <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-dark" runat="server" Text="Modificar"></asp:Button>
-                <a href="Default.aspx" cssclass="link-danger link-underline-danger">Cancelar</a>
+                <a href="Default.aspx" cssClass="link-danger link-underline-danger">Cancelar</a>
+                <a href="Carrito.aspx" cssClass="btn btn-secondary" >Agregar al Carrito</a>
             </div>
         </div>
     </div>
