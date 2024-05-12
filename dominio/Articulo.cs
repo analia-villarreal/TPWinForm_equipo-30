@@ -24,5 +24,11 @@ namespace dominio
         public string ImagenUrl { get; set; }
         public decimal Precio { get; set; }
 
+        public Articulo(int id, string desc)
+        {
+            ID = id;
+            Descripcion = desc;
+        }
+        public Articulo() { }
     }
 }

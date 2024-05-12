@@ -24,7 +24,12 @@
                         <a class="nav-link" href="ArticulosLista.aspx">ABM Articulos<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Carrito.aspx">Carrito<span class="sr-only">(current)</span></a>
+                        <nav class="navbar navbar-dark bg-dark">
+                            <a class="navbar-link" href="Carrito.aspx">
+                                <img src="https://cdn.icon-icons.com/icons2/933/PNG/512/shopping-cart_icon-icons.com_72552.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                                Carrito
+                            </a>
+                        </nav>
                     </li>
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown
                     </a>
@@ -50,11 +55,10 @@
                         <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                     </li>
                 </ul>
+            </nav>
         </div>
-        </div>
-</nav>
-            <%--</div>--%>
-        <div class="p-lg-5"> 
+        <%--</div>--%>
+        <div class="p-lg-5">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>

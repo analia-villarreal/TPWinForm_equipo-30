@@ -13,5 +13,14 @@ namespace TPWinForm_equipo_30
 
     public partial class Carrito
     {
+
+        /// <summary>
+        /// dgvCarrito control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvCarrito;
     }
 }

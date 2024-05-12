@@ -10,7 +10,7 @@
 
         <% foreach (dominio.Articulo item in ListaArticulos)
             {%>
-
+        
         <div class="col">
             <div class="card">
                 <img src="<%: item.ImagenUrl %>" class="card-img-top" alt="...">

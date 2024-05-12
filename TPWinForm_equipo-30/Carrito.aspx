@@ -5,6 +5,12 @@
 
 
     <h1>Carrito</h1>
+    <h2>Artículos en el Carrito:</h2>
+    <div class="row">
+        <div class="col-6">
+            <asp:GridView CssClass="table" runat="server" ID="dgvCarrito"></asp:GridView>
+        </div>
+    </div>
 
 
 </asp:Content>
