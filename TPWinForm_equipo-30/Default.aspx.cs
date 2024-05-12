@@ -24,6 +24,7 @@ namespace TPWinForm_equipo_30
         protected void btnCarrito_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("Carrito.aspx");
+
         }
     }
 }
