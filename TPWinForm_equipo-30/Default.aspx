@@ -18,8 +18,8 @@
                     <h5 class="card-title"><%: item.NombreArticulo %></h5>
                     <p class="card-text"><%: item.Descripcion %></p>
                     <a href="DetalleArticulo.aspx?id=<%: item.ID %>" type="button" class="btn btn-info">Ver detalle</a>
-                    <asp:ImageButton ID="btnCarrito" Width="35" OnClick="btnCarrito_Click" Height="35" src="https://cdn.icon-icons.com/icons2/933/PNG/512/shopping-cart_icon-icons.com_72552.png" runat="server" />
                 </div>
+                <a href="Carrito.aspx?id=<%: item.ID %>" class="btn btn-secondary">Agregar al Carrito</a>
             </div>
         </div>
 

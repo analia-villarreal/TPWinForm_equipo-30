@@ -15,9 +15,14 @@ namespace TPWinForm_equipo_30
         public List<Articulo> ListaArticulos { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            ListaArticulos = negocio.ListaconSP();
+            if (Session["ListaArticulos"] != null)
+                ListaArticulos = (List<Articulo>)Session["ListaArticulos"];
+            else
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                ListaArticulos = negocio.ListaconSP();
+                Session.Add("ListaArticulos", ListaArticulos);
+            }
 
         }
 

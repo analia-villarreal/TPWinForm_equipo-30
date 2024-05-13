@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using negocio;
+using dominio;
 
 namespace TPWinForm_equipo_30
 {
@@ -12,9 +13,31 @@ namespace TPWinForm_equipo_30
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            CarritoNegocio negocio = new CarritoNegocio();
-            dgvCarrito.DataSource = negocio.listar();
+            List<Articulo> carrito;
+            //     carrito   = Session["Carrito"] != null ? (List<Articulo>)Session["Carrito"] : new List<Articulo>();
+            if (Session["Carrito"] != null)
+            {
+                carrito = (List<Articulo>)Session["Carrito"];
+            }
+            else
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                carrito = new List<Articulo>();
+                Session.Add("Carrito", carrito);
+            }
+
+
+            int id = int.Parse(Request.QueryString["id"]);
+
+            List<Articulo> articuloList = (List<Articulo>)Session["ListaArticulos"];
+            Articulo seleccion = articuloList.Find(x => x.ID == id);
+            carrito.Add(seleccion);
+
+            dgvCarrito.DataSource = carrito;
             dgvCarrito.DataBind();
+
+
+
         }
     }
 }
