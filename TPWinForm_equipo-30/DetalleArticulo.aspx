@@ -39,11 +39,11 @@
                 <asp:TextBox ID="txtPrecio" CssClass="form-control" runat="server" />
             </div>
 
-
             <div class="mb-3">
                     <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-dark" runat="server" Text="Modificar"></asp:Button>
                     <a href="Default.aspx" Class="btn btn-danger">Volver</a>
-                    <a href="Carrito.aspx" Class="btn btn-secondary">Agregar al Carrito</a>
+                    <a href="Carrito.aspx?id=IDetalleArticulo" Class="btn btn-secondary">Agregar al Carrito</a>
+            
             </div>
         </div>
     </div>

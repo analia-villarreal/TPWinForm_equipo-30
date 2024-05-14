@@ -16,6 +16,7 @@ namespace TPWinForm_equipo_30
 
         protected void Page_Load(object sender, EventArgs e)
         {
+           
             ArticuloNegocio negocio = new ArticuloNegocio();
             ListaArticulos = negocio.ListaconSP();
 
