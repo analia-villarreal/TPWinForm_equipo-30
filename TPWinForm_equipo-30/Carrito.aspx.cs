@@ -26,17 +26,31 @@ namespace TPWinForm_equipo_30
                 Session.Add("Carrito", carrito);
             }
 
-
-            int id = int.Parse(Request.QueryString["id"]);
-
-            List<Articulo> articuloList = (List<Articulo>)Session["ListaArticulos"];
-            Articulo seleccion = articuloList.Find(x => x.ID == id);
-            carrito.Add(seleccion);
+            if(Request.QueryString["id"] != null)
+            {
+                int id = int.Parse(Request.QueryString["id"]);
+                List<Articulo> articuloList = (List<Articulo>)Session["ListaArticulos"];
+                Articulo seleccion = articuloList.Find(x => x.ID == id);
+                carrito.Add(seleccion);
+            }
+            
 
             dgvCarrito.DataSource = carrito;
             dgvCarrito.DataBind();
 
+        }
 
+        protected void dgvCarrito_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = dgvCarrito.SelectedIndex;
+            
+            List<Articulo> carrito = (List<Articulo>)Session["Carrito"];
+
+            carrito.RemoveAt(id);
+            Session.Add("Carrito", carrito);
+
+            dgvCarrito.DataSource = carrito;
+            dgvCarrito.DataBind();
 
         }
     }

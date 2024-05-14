@@ -8,7 +8,15 @@
     <h2>Artículos en el Carrito:</h2>
     <div class="row">
         <div class="col-6">
-            <asp:GridView CssClass="table" runat="server" ID="dgvCarrito"></asp:GridView>
+            <asp:GridView CssClass="table" runat="server" ID="dgvCarrito" OnSelectedIndexChanged="dgvCarrito_SelectedIndexChanged" AutoGenerateColumns="false">
+                <Columns>
+                    <asp:BoundField HeaderText="ID" DataField="ID" />
+                    <asp:BoundField HeaderText="NombreArticulo" DataField="NombreArticulo" />
+                    <asp:BoundField HeaderText="Precio" DataField="Precio" />
+                    <asp:CommandField HeaderText="Eliminar" SelectText="Eliminar" ShowSelectButton="true"  />
+                </Columns>
+
+            </asp:GridView>
         </div>
     </div>
 
