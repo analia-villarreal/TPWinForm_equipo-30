@@ -64,5 +64,11 @@ namespace TPWinForm_equipo_30
         {
 
         }
+
+        protected void btnCarrito_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(txtID.Text);
+            Response.Redirect("Carrito.aspx?id=" + id);
+        }
     }
 }

@@ -42,7 +42,7 @@
             <div class="mb-3">
                     <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-dark" runat="server" Text="Modificar"></asp:Button>
                     <a href="Default.aspx" Class="btn btn-danger">Volver</a>
-                    <a href="Carrito.aspx?id=IDetalleArticulo" Class="btn btn-secondary">Agregar al Carrito</a>
+                    <asp:Button ID="btnCarrito" OnClick="btnCarrito_Click" runat="server" Text="Agregar al Carrito" CssClass="btn btn-secondary" />
             
             </div>
         </div>
