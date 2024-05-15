@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MiMaster.Master" AutoEventWireup="true" CodeBehind="Carrito.aspx.cs" Inherits="TPWinForm_equipo_30.Carrito" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -13,7 +14,7 @@
                     <asp:BoundField HeaderText="ID" DataField="ID" />
                     <asp:BoundField HeaderText="NombreArticulo" DataField="NombreArticulo" />
                     <asp:BoundField HeaderText="Precio" DataField="Precio" />
-                    <asp:CommandField HeaderText="Eliminar" SelectText="Eliminar" ShowSelectButton="true"  />
+                    <asp:CommandField HeaderText="Eliminar" SelectText="Eliminar" ShowSelectButton="true" />
                 </Columns>
 
             </asp:GridView>
@@ -21,4 +22,12 @@
     </div>
 
     <a href="Default.aspx" class="btn btn-danger">Volver</a>
+    <hr />
+<%--    <div class="col-2 border border-primary rounded-pill p-3 mb-2 bg-secondary text-white">
+    </div>--%>
+    <asp:Button ID="btnCalcularImporte" runat="server" Text="Calcular Importe Total" CssClass="btn btn-outline-info" OnClick="btnCalcularImporte_Click" />
+    <asp:Label ID="lblImporteTotal" runat="server" Text="Importe Total: " />
+
+
+
 </asp:Content>

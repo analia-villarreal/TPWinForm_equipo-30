@@ -13,6 +13,8 @@ namespace TPWinForm_equipo_30
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+
             List<Articulo> carrito;
             //     carrito   = Session["Carrito"] != null ? (List<Articulo>)Session["Carrito"] : new List<Articulo>();
             if (Session["Carrito"] != null)
@@ -31,12 +33,17 @@ namespace TPWinForm_equipo_30
                 int id = int.Parse(Request.QueryString["id"]);
                 List<Articulo> articuloList = (List<Articulo>)Session["ListaArticulos"];
                 Articulo seleccion = articuloList.Find(x => x.ID == id);
-                carrito.Add(seleccion);
+                if (!IsPostBack)
+                {
+                    carrito.Add(seleccion);
+                }
             }
+            
             
 
             dgvCarrito.DataSource = carrito;
             dgvCarrito.DataBind();
+            
 
         }
 
@@ -63,5 +70,27 @@ namespace TPWinForm_equipo_30
             dgvCarrito.DataBind();
 
         }
+
+        protected void CalcularImporteTotal()
+        {
+            List<Articulo> carrito = (List<Articulo>)Session["Carrito"];
+            if (carrito == null)
+            {
+                return;
+            }
+            decimal importeTotal = 0;
+
+            foreach (Articulo articulo in carrito)
+            {
+                importeTotal += articulo.Precio;
+            }
+            lblImporteTotal.Text = $"Importe Total: {importeTotal:C}";
+        }
+
+        protected void btnCalcularImporte_Click(object sender, EventArgs e)
+        {
+            CalcularImporteTotal();
+        }
+
     }
 }
