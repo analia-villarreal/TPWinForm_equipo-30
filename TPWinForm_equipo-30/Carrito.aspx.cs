@@ -50,20 +50,17 @@ namespace TPWinForm_equipo_30
         protected void dgvCarrito_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<Articulo> carrito = (List<Articulo>)Session["Carrito"];
-            if (Request.QueryString["id"] != null)
-            {
-                int idRequest = int.Parse(Request.QueryString["id"]);
+                Articulo seleccion = new Articulo();
                 List<Articulo> articuloList = (List<Articulo>)Session["ListaArticulos"];
-                Articulo seleccion = articuloList.Find(x => x.ID == idRequest);
+                int id = dgvCarrito.SelectedIndex;
+                seleccion.ID = articuloList[id].ID;
+                seleccion = articuloList.Find(x => x.ID == id);
                 
                 //carrito = (List<Articulo>)Session["Carrito"];
                 carrito.Remove(seleccion);
-            }
-            int id = dgvCarrito.SelectedIndex;
-            
-
 
             carrito.RemoveAt(id);
+            
             Session.Add("Carrito", carrito);
 
             dgvCarrito.DataSource = carrito;
