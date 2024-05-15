@@ -16,7 +16,6 @@ namespace TPWinForm_equipo_30
 
 
             List<Articulo> carrito;
-            //     carrito   = Session["Carrito"] != null ? (List<Articulo>)Session["Carrito"] : new List<Articulo>();
             if (Session["Carrito"] != null)
             {
                 carrito = (List<Articulo>)Session["Carrito"];
@@ -33,17 +32,22 @@ namespace TPWinForm_equipo_30
                 int id = int.Parse(Request.QueryString["id"]);
                 List<Articulo> articuloList = (List<Articulo>)Session["ListaArticulos"];
                 Articulo seleccion = articuloList.Find(x => x.ID == id);
-                if (!IsPostBack)
+                if (!carrito.Any(x => x.ID == id)) //busco en el carrito que el id no esté repetido
                 {
-                    carrito.Add(seleccion);
+                    //articulo no se encuentra en el carrito
+                    if (!IsPostBack)
+                    {
+                        carrito.Add(seleccion);
+                    }
+                }
+                else
+                {
+                    //articulo repetido.... sumar +1 en cantidad
                 }
             }
 
-
-
             dgvCarrito.DataSource = carrito;
             dgvCarrito.DataBind();
-
 
         }
 
