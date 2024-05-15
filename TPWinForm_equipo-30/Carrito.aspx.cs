@@ -13,7 +13,7 @@ namespace TPWinForm_equipo_30
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
 
             List<Articulo> carrito;
             //     carrito   = Session["Carrito"] != null ? (List<Articulo>)Session["Carrito"] : new List<Articulo>();
@@ -28,7 +28,7 @@ namespace TPWinForm_equipo_30
                 Session.Add("Carrito", carrito);
             }
 
-            if(Request.QueryString["id"] != null)
+            if (Request.QueryString["id"] != null)
             {
                 int id = int.Parse(Request.QueryString["id"]);
                 List<Articulo> articuloList = (List<Articulo>)Session["ListaArticulos"];
@@ -38,29 +38,27 @@ namespace TPWinForm_equipo_30
                     carrito.Add(seleccion);
                 }
             }
-            
-            
+
+
 
             dgvCarrito.DataSource = carrito;
             dgvCarrito.DataBind();
-            
+
 
         }
 
         protected void dgvCarrito_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<Articulo> carrito = (List<Articulo>)Session["Carrito"];
-                Articulo seleccion = new Articulo();
-                List<Articulo> articuloList = (List<Articulo>)Session["ListaArticulos"];
-                int id = dgvCarrito.SelectedIndex;
-                seleccion.ID = articuloList[id].ID;
-                seleccion = articuloList.Find(x => x.ID == id);
-                
-                //carrito = (List<Articulo>)Session["Carrito"];
-                carrito.Remove(seleccion);
+            Articulo seleccion = new Articulo();
+            List<Articulo> articuloList = (List<Articulo>)Session["ListaArticulos"];
+            int id = dgvCarrito.SelectedIndex;
+            seleccion = carrito[id];
+            //seleccion = articuloList.Find(x => x.ID == id);
 
-            carrito.RemoveAt(id);
-            
+            //carrito = (List<Articulo>)Session["Carrito"];
+            carrito.Remove(seleccion);
+
             Session.Add("Carrito", carrito);
 
             dgvCarrito.DataSource = carrito;
