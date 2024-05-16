@@ -31,8 +31,8 @@
                             </a>
                         </nav>
                     </li>
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <asp:TextBox CssClass="form-control me-2" ID="lblSearch" placeholder="¿Qué estás buscando?" runat="server"/>
+                    <asp:button CssClass="btn btn-outline-success" ID="btnSearch" href="DetalleArticulo.aspx" runat="server" OnClick="btnBuscar" Text="Search"/>
                     <li class="nav-item">
                         <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                     </li>

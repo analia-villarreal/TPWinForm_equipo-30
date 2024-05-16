@@ -55,7 +55,25 @@ namespace TPWinForm_equipo_30
                 //ddlMarca.SelectedItem.Text = seleccion.Marca.NombreMarca.ToString();
                 txtImagen.Text = seleccion.ImagenUrl;
                 txtPrecio.Text = seleccion.Precio.ToString();
+            }
 
+            if (Request.QueryString["detalle"] != null)
+            {
+                //string detalle = Request.QueryString["detalle"];
+                //Articulo seleccion = ListaArticulos.Find(x => x.NombreArticulo.Contains(detalle));
+                string detalle = Request.QueryString["detalle"];
+                Articulo seleccion = ListaArticulos.Find(x => x.NombreArticulo.IndexOf(detalle, StringComparison.OrdinalIgnoreCase) >= 0);
+                if (seleccion != null)
+                {
+                    txtID.ReadOnly = true;
+                    txtCodArticullo.ReadOnly = true;
+                    txtID.Text = seleccion.ID.ToString();
+                    txtNombreArticulo.Text = seleccion.NombreArticulo;
+                    txtCodArticullo.Text = seleccion.CodArticulo;
+                    txtDescripcion.Text = seleccion.Descripcion;
+                    txtImagen.Text = seleccion.ImagenUrl;
+                    txtPrecio.Text = seleccion.Precio.ToString();
+                }
             }
 
         }

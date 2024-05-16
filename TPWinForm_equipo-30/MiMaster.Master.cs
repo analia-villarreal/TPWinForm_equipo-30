@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.Expressions;
 
 namespace TPWinForm_equipo_30
 {
@@ -12,6 +13,11 @@ namespace TPWinForm_equipo_30
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+        protected void btnBuscar(object sender, EventArgs e)
+        {
+            string detalle = lblSearch.Text;
+            Response.Redirect("DetalleArticulo.aspx?detalle=" + detalle);
         }
     }
 }
