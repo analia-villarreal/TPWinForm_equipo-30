@@ -24,13 +24,13 @@ namespace TPWinForm_equipo_30
         protected global::System.Web.UI.WebControls.GridView dgvCarrito;
 
         /// <summary>
-        /// btnCalcularImporte control.
+        /// lblImporteTotal1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCalcularImporte;
+        protected global::System.Web.UI.WebControls.Label lblImporteTotal1;
 
         /// <summary>
         /// lblImporteTotal control.

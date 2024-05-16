@@ -25,6 +25,7 @@ namespace TPWinForm_equipo_30
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 carrito = new List<Articulo>();
                 Session.Add("Carrito", carrito);
+
             }
 
             if (Request.QueryString["id"] != null)
@@ -49,6 +50,10 @@ namespace TPWinForm_equipo_30
             dgvCarrito.DataSource = carrito;
             dgvCarrito.DataBind();
 
+            if (Session["Carrito"] != null)
+            {
+                CalcularImporteTotal();
+            }
         }
 
         protected void dgvCarrito_SelectedIndexChanged(object sender, EventArgs e)
@@ -83,7 +88,7 @@ namespace TPWinForm_equipo_30
             {
                 importeTotal += articulo.Precio;
             }
-            lblImporteTotal.Text = $"Importe Total: {importeTotal:C}";
+            lblImporteTotal.Text = $": {importeTotal:C}";
         }
 
         protected void btnCalcularImporte_Click(object sender, EventArgs e)

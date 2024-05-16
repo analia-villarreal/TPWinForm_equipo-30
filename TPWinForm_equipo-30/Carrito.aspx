@@ -24,10 +24,22 @@
     <a href="Default.aspx" class="btn btn-danger">Volver</a>
     <hr />
 <%--    <div class="col-2 border border-primary rounded-pill p-3 mb-2 bg-secondary text-white">
-    </div>--%>
+    </div>
     <asp:Button ID="btnCalcularImporte" runat="server" Text="Calcular Importe Total" CssClass="btn btn-outline-info" OnClick="btnCalcularImporte_Click" />
     <asp:Label ID="lblImporteTotal" runat="server" Text="Importe Total: " />
+    --%>
 
-
+    <%if (Session["Carrito"] != null)
+        { %>
+        <div class="badge badge-danger" >
+            <span>
+                <asp:Label Text="Total" ID="lblImporteTotal1" runat="server" />
+            </span>
+            <span>
+                <asp:Label Text="" ID="lblImporteTotal" runat="server" />
+            </span>
+            
+        </div>
+    <%} %>
 
 </asp:Content>
