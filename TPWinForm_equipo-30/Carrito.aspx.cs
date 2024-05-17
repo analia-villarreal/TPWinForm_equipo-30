@@ -96,5 +96,35 @@ namespace TPWinForm_equipo_30
             CalcularImporteTotal();
         }
 
+        protected void btnMenos_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+            Label lbl = (Label)row.FindControl("lblCant");
+            int cantidad = int.Parse(lbl.Text);
+            if (cantidad > 0)
+            {
+                cantidad--;
+                lbl.Text = cantidad.ToString();
+            }
+        }
+
+        protected void btnMas_Click(object sender, EventArgs e)
+        {
+            if (IsPostBack)
+            {
+                Button btn = (Button)sender;
+                GridViewRow row = (GridViewRow)btn.NamingContainer;
+                Label lbl = (Label)row.FindControl("lblCant");
+                int cantidad = int.Parse(lbl.Text);
+                cantidad++;
+                lbl.Text = cantidad.ToString();
+
+                dgvCarrito.DataBind();
+            }
+            
+        }
+
+
     }
 }
