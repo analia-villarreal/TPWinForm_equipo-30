@@ -13,45 +13,33 @@ namespace TPWinForm_equipo_30
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
-            List<Articulo> carrito;
-            if (Session["Carrito"] != null)
+            if (!IsPostBack)
             {
-                carrito = (List<Articulo>)Session["Carrito"];
-            }
-            else
-            {
-                ArticuloNegocio negocio = new ArticuloNegocio();
-                carrito = new List<Articulo>();
-                Session.Add("Carrito", carrito);
-
-            }
-
-            if (Request.QueryString["id"] != null)
-            {
-                int id = int.Parse(Request.QueryString["id"]);
-                List<Articulo> articuloList = (List<Articulo>)Session["ListaArticulos"];
-                Articulo seleccion = articuloList.Find(x => x.ID == id);
-                if (!carrito.Any(x => x.ID == id)) //busco en el carrito que el id no esté repetido
+                List<Articulo> carrito;
+                if (Session["Carrito"] != null)
                 {
-                    //articulo no se encuentra en el carrito
-                    if (!IsPostBack)
-                    {
-                        carrito.Add(seleccion);
-                    }
+                    carrito = (List<Articulo>)Session["Carrito"];
                 }
                 else
                 {
-                    //articulo repetido.... sumar +1 en cantidad
+                    carrito = new List<Articulo>();
+                    Session["Carrito"] = carrito;
                 }
-            }
 
-            dgvCarrito.DataSource = carrito;
-            dgvCarrito.DataBind();
+                if (Request.QueryString["id"] != null)
+                {
+                    int id = int.Parse(Request.QueryString["id"]);
+                    List<Articulo> articuloList = (List<Articulo>)Session["ListaArticulos"];
+                    Articulo seleccion = articuloList?.Find(x => x.ID == id);
+                    if (seleccion != null && !carrito.Any(x => x.ID == id))
+                    {
+                        seleccion.cantidad = 1;
+                        carrito.Add(seleccion);
+                    }
+                }
 
-            if (Session["Carrito"] != null)
-            {
+                dgvCarrito.DataSource = carrito;
+                dgvCarrito.DataBind();
                 CalcularImporteTotal();
             }
         }
@@ -59,35 +47,24 @@ namespace TPWinForm_equipo_30
         protected void dgvCarrito_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<Articulo> carrito = (List<Articulo>)Session["Carrito"];
-            Articulo seleccion = new Articulo();
-            List<Articulo> articuloList = (List<Articulo>)Session["ListaArticulos"];
             int id = dgvCarrito.SelectedIndex;
-            seleccion = carrito[id];
-            //seleccion = articuloList.Find(x => x.ID == id);
+            if (id >= 0 && id < carrito.Count)
+            {
+                carrito.RemoveAt(id);
+                Session["Carrito"] = carrito;
 
-            //carrito = (List<Articulo>)Session["Carrito"];
-            carrito.Remove(seleccion);
-
-            Session.Add("Carrito", carrito);
-
-            dgvCarrito.DataSource = carrito;
-            dgvCarrito.DataBind();
-
+                dgvCarrito.DataSource = carrito;
+                dgvCarrito.DataBind();
+                CalcularImporteTotal();
+            }
         }
 
         protected void CalcularImporteTotal()
         {
             List<Articulo> carrito = (List<Articulo>)Session["Carrito"];
-            if (carrito == null)
-            {
-                return;
-            }
-            decimal importeTotal = 0;
+            if (carrito == null) return;
 
-            foreach (Articulo articulo in carrito)
-            {
-                importeTotal += articulo.Precio;
-            }
+            decimal importeTotal = carrito.Sum(articulo => articulo.Precio * articulo.cantidad);
             lblImporteTotal.Text = $": {importeTotal:C}";
         }
 
@@ -100,31 +77,48 @@ namespace TPWinForm_equipo_30
         {
             Button btn = (Button)sender;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
-            Label lbl = (Label)row.FindControl("lblCant");
-            int cantidad = int.Parse(lbl.Text);
-            if (cantidad > 0)
+            int rowIndex = row.RowIndex;
+
+            List<Articulo> carrito = (List<Articulo>)Session["Carrito"];
+            if (carrito != null && rowIndex >= 0 && rowIndex < carrito.Count)
             {
-                cantidad--;
-                lbl.Text = cantidad.ToString();
+                Articulo articulo = carrito[rowIndex];
+                if (articulo.cantidad > 0)
+                {
+                    articulo.cantidad--;
+                }
+                Session["Carrito"] = carrito;
+                Label lbl = (Label)row.FindControl("lblCant");
+                int cantidad = int.Parse(lbl.Text);
+                if (cantidad < 2)
+                {
+                    carrito.Remove(articulo);
+                }
+
+                dgvCarrito.DataSource = carrito;
+                dgvCarrito.DataBind();
+                CalcularImporteTotal();
             }
         }
 
         protected void btnMas_Click(object sender, EventArgs e)
         {
-            if (IsPostBack)
+            Button btn = (Button)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+            int rowIndex = row.RowIndex;
+
+            List<Articulo> carrito = (List<Articulo>)Session["Carrito"];
+            if (carrito != null && rowIndex >= 0 && rowIndex < carrito.Count)
             {
-                Button btn = (Button)sender;
-                GridViewRow row = (GridViewRow)btn.NamingContainer;
-                Label lbl = (Label)row.FindControl("lblCant");
-                int cantidad = int.Parse(lbl.Text);
-                cantidad++;
-                lbl.Text = cantidad.ToString();
+                Articulo articulo = carrito[rowIndex];
+                articulo.cantidad++;
+                Session["Carrito"] = carrito;
+                
 
+                dgvCarrito.DataSource = carrito;
                 dgvCarrito.DataBind();
+                CalcularImporteTotal();
             }
-            
         }
-
-
     }
 }
