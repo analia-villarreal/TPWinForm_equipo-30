@@ -16,8 +16,6 @@
                     <asp:BoundField HeaderText="Precio" DataField="Precio" />
                     <asp:TemplateField HeaderText="Cantidad">
                         <ItemTemplate>
-
-
                             <asp:Button ID="btnMenos" runat="server" Text="-" OnClick="btnMenos_Click" />
                             <asp:Label ID="lblCant" runat="server" Text='<%# Bind("cantidad") %>' />
                             <asp:Button ID="btnMas" runat="server" Text="+" OnClick="btnMas_Click" />

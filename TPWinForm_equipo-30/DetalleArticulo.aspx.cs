@@ -51,8 +51,8 @@ namespace TPWinForm_equipo_30
                 txtNombreArticulo.Text = seleccion.NombreArticulo;
                 txtCodArticullo.Text = seleccion.CodArticulo;
                 txtDescripcion.Text = seleccion.Descripcion;
-                //ddlCategoria.SelectedItem.Text = seleccion.Categoria.NombreCategoria.ToString();      
-                //ddlMarca.SelectedItem.Text = seleccion.Marca.NombreMarca.ToString();
+                ddlCategoria.SelectedValue = seleccion.Categoria.IDCategoria.ToString();      
+                ddlMarca.SelectedValue = seleccion.Marca.IDMarca.ToString();
                 txtImagen.Text = seleccion.ImagenUrl;
                 txtPrecio.Text = seleccion.Precio.ToString();
             }

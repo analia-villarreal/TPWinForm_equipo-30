@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using negocio;
 using dominio;
+using System.Windows;
 
 namespace TPWinForm_equipo_30
 {
@@ -35,6 +36,10 @@ namespace TPWinForm_equipo_30
                     {
                         seleccion.cantidad = 1;
                         carrito.Add(seleccion);
+                    }
+                    else
+                    {
+                        seleccion.cantidad++;                   //si se agrega un elemento existente en el carrito, le sumo +1
                     }
                 }
 
@@ -75,49 +80,50 @@ namespace TPWinForm_equipo_30
 
         protected void btnMenos_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            GridViewRow row = (GridViewRow)btn.NamingContainer;
-            int rowIndex = row.RowIndex;
+            Button btn = (Button)sender;                                    //guardamos en una variable button el boton que desencadena el evento
+            GridViewRow row = (GridViewRow)btn.NamingContainer;             //guardamos la fila del dgv que se encuentra el boton que acciona el evento 
+            int rowIndex = row.RowIndex;                                    //agarramos el indice de la fila del dgv para manipular los controles de dicha fila
 
             List<Articulo> carrito = (List<Articulo>)Session["Carrito"];
-            if (carrito != null && rowIndex >= 0 && rowIndex < carrito.Count)
+            if (carrito != null && rowIndex >= 0 && rowIndex < carrito.Count)    //validamos que se substraiga un elemento existente dentro del carrito
             {
                 Articulo articulo = carrito[rowIndex];
                 if (articulo.cantidad > 0)
                 {
-                    articulo.cantidad--;
+                    articulo.cantidad--;                                        //substraemos si la cantidad es > a 0
                 }
-                Session["Carrito"] = carrito;
+
+                Session["Carrito"] = carrito;                                   //actualizamos la session con la nueva cantidad
                 Label lbl = (Label)row.FindControl("lblCant");
                 int cantidad = int.Parse(lbl.Text);
-                if (cantidad < 2)
-                {
-                    carrito.Remove(articulo);
+                if (cantidad <= 1)
+                {                                                               //buscamos el lbl de cantidad para poder obtener el valor del label
+                    carrito.Remove(articulo);                                   //removemos el articulo si es menor a 1
                 }
 
                 dgvCarrito.DataSource = carrito;
-                dgvCarrito.DataBind();
+                dgvCarrito.DataBind();                                          //actualizamos el dgv con los valores nuevos y calculamos imp total
                 CalcularImporteTotal();
             }
         }
 
         protected void btnMas_Click(object sender, EventArgs e)
         {
-            Button btn = (Button)sender;
-            GridViewRow row = (GridViewRow)btn.NamingContainer;
-            int rowIndex = row.RowIndex;
+            Button btn = (Button)sender;                                
+            GridViewRow row = (GridViewRow)btn.NamingContainer;             
+            int rowIndex = row.RowIndex;                                 
 
             List<Articulo> carrito = (List<Articulo>)Session["Carrito"];
-            if (carrito != null && rowIndex >= 0 && rowIndex < carrito.Count)
+            if (carrito != null && rowIndex >= 0 && rowIndex < carrito.Count)   //validamos que se adicione un elemento existente dentro del carrito
             {
-                Articulo articulo = carrito[rowIndex];
-                articulo.cantidad++;
-                Session["Carrito"] = carrito;
+                Articulo articulo = carrito[rowIndex];                  //obtenemos el articulo con el indice de la grilla
+                articulo.cantidad++;        
+                Session["Carrito"] = carrito;                           //sumamos y guardamos en la session
                 
 
-                dgvCarrito.DataSource = carrito;
+                dgvCarrito.DataSource = carrito;                        
                 dgvCarrito.DataBind();
-                CalcularImporteTotal();
+                CalcularImporteTotal();                                 //bindeamos al dgv y calculamos importe final
             }
         }
     }

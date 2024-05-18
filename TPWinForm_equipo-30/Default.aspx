@@ -12,7 +12,7 @@
             {%>
         
         <div class="col">
-            <div class="card" style="width: 200px; height: 450px;">
+            <div class="card" style="width: 400px; height:600px;">
                 <img src="<%: item.ImagenUrl %>" class="card-img-top" alt="">
                 <div class="card-body">
                     <h5 class="card-title"><%: item.NombreArticulo %></h5>
