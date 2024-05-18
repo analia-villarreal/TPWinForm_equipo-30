@@ -11,7 +11,7 @@ namespace TPWinForm_equipo_30
 {
 
 
-    public partial class Default
+    public partial class FinalizarCompra
     {
     }
 }
