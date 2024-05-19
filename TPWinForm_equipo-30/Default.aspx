@@ -4,7 +4,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <h1>LISTA</h1>
+    <h1>Articulos</h1>
+    <hr />
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
 
@@ -12,7 +13,7 @@
             {%>
         
         <div class="col">
-            <div class="card" style="width: 400px; height:600px;">
+            <div class="card" >
                 <img src="<%: item.ImagenUrl %>" class="card-img-top" alt="">
                 <div class="card-body">
                     <h5 class="card-title"><%: item.NombreArticulo %></h5>

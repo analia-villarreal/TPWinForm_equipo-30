@@ -36,16 +36,19 @@ namespace TPWinForm_equipo_30
                     {
                         seleccion.cantidad = 1;
                         carrito.Add(seleccion);
+                        ActualizarCarrito();
                     }
                     else
                     {
                         seleccion.cantidad++;                   //si se agrega un elemento existente en el carrito, le sumo +1
+                        ActualizarCarrito();
                     }
                 }
 
                 dgvCarrito.DataSource = carrito;
                 dgvCarrito.DataBind();
                 CalcularImporteTotal();
+                ActualizarCarrito();
             }
         }
 
@@ -61,6 +64,7 @@ namespace TPWinForm_equipo_30
                 dgvCarrito.DataSource = carrito;
                 dgvCarrito.DataBind();
                 CalcularImporteTotal();
+                ActualizarCarrito();
             }
         }
 
@@ -104,6 +108,7 @@ namespace TPWinForm_equipo_30
                 dgvCarrito.DataSource = carrito;
                 dgvCarrito.DataBind();                                          //actualizamos el dgv con los valores nuevos y calculamos imp total
                 CalcularImporteTotal();
+                ActualizarCarrito();
             }
         }
 
@@ -124,7 +129,26 @@ namespace TPWinForm_equipo_30
                 dgvCarrito.DataSource = carrito;                        
                 dgvCarrito.DataBind();
                 CalcularImporteTotal();                                 //bindeamos al dgv y calculamos importe final
+                ActualizarCarrito();
             }
         }
+        private void ActualizarCarrito()
+        {
+            if (Session["Carrito"] != null)
+            {
+                var articulosSeleccionados = (List<Articulo>)Session["Carrito"];
+
+                int totalItems = 0;
+
+                foreach (var item in articulosSeleccionados)
+                {
+                    totalItems += item.cantidad;
+                }
+
+                string script = $"document.getElementById('cartItemCount').innerText = '{totalItems}';";
+                ScriptManager.RegisterStartupScript(this, GetType(), "updateCartCount", script, true);
+            }
+        }
+
     }
 }
