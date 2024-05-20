@@ -38,14 +38,26 @@
 
     <%if (Session["Carrito"] != null)
         { %>
-    <div class="badge badge-danger">
-        <span>
-            <asp:Label Text="Total" ID="lblImporteTotal1" runat="server" />
-        </span>
-        <span>
-            <asp:Label Text="" ID="lblImporteTotal" runat="server" />
-        </span>
+         <div class="badge badge-danger">
+            <span>
+                <asp:Label Text="Total" ID="lblImporteTotal1" runat="server" />
+            </span>
+            <span>
+                <asp:Label Text="" ID="lblImporteTotal" runat="server" />
+            </span>
 
-    </div>
+         </div>
+        
+         <a href="#" onclick="confirmarCompra()" class="btn btn-success">Finalizar Compra</a>
     <%} %>
+
+    <script>
+    function confirmarCompra() {
+        if (confirm("¿Estás seguro de que deseas finalizar la compra?")) {
+            window.location.href = "FinalizarCompra.aspx";
+        } else {
+            window.location.href = "Carrito.aspx";
+        }
+    }
+    </script>
 </asp:Content>

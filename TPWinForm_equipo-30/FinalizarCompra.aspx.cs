@@ -15,16 +15,6 @@ namespace TPWinForm_equipo_30
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            listaCarrito1 = (List<Articulo>)Session["Carrito"];
             
 
         }

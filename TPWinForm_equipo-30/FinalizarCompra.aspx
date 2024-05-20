@@ -3,21 +3,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+    <hr />
+    <hr />
 
-    <div>
-
-        <div Cssclass="table bordered">
-            <%foreach (dominio.Articulo item in listaCarrito1)
-                {
-
-                }
-                %>
-            
-
-        </div>
-    </div>
-
-
+    <h1>Gracias por su compra!!!</h1>
 
 
 
